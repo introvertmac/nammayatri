@@ -24,7 +24,7 @@ export default function Dashboard() {
     if (!publicKey) {
       router.push('/');
     } else {
-      const userRole = getWalletRole(publicKey).replace(' Representative', '');
+      const userRole = getWalletRole(publicKey);
       setRole(userRole);
       getTokenBalance(publicKey, NYT_TOKEN_MINT, connection)
         .then(setBalance)
@@ -32,15 +32,16 @@ export default function Dashboard() {
       
       // Set placeholder data based on role
       switch (userRole) {
+        case 'Driver Representative':
         case 'Driver':
           setUpcomingPayment({ amount: 1500, date: '2023-11-25' });
           setPendingProposals([{ title: 'Increase Driver Commissions', description: 'Proposal to increase driver commissions by 5%' }]);
           break;
-        case 'Developer':
+        case 'Developer Representative':
           setUpcomingPayment({ amount: 5000, date: '2023-11-28' });
           setPendingProposals([{ title: 'Implement Surge Pricing', description: 'Implement dynamic pricing during peak hours' }]);
           break;
-        case 'Passenger':
+        case 'Passenger Representative':
           setUpcomingPayment(null);
           setPendingProposals([{ title: 'Add In-App Tipping', description: 'Add a feature for passengers to tip drivers through the app' }]);
           break;

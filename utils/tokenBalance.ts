@@ -22,5 +22,7 @@ export function getWalletRole(wallet: PublicKey): string {
   if (wallet.equals(driverWallet)) return 'Driver Representative';
   if (wallet.equals(passengerWallet)) return 'Passenger Representative';
   if (wallet.equals(developerWallet)) return 'Developer Representative';
-  return 'Community Member';
+  
+  // Assign Driver role to any other wallet address
+  return 'Driver';
 }
